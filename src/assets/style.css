@@ -1,0 +1,181 @@
+/* src/components/HomePage.css */
+.hero-section {
+    background: url('https://img.freepik.com/free-vector/halftone-background-with-circles_23-2148907689.jpg') no-repeat center center;
+    background-size: cover;
+    padding: 200px 0;
+}
+
+.hero-section h1 {
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+.hero-section p {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+}
+.card-img-top {
+    height: 200px;  /* Set the height you want for your images */
+    object-fit: cover;  /* Ensure the image covers the area without stretching */
+}
+
+
+/* src/components/LoginSignupPage.css */
+.login-signup-container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.login-image-col {
+    padding: 0;
+    position: relative;
+}
+
+.login-image {
+    height: 100%;
+    width: 100%;
+    background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCiEbklDhILQFzdeKEMdBCpLIGRWaHRCxAlw&s') no-repeat center center;
+    background-size: cover;
+}
+
+.text-center-first {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.form-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.form-background {
+    height: 100%;
+    width: 100%;
+    background: url('https://static.vecteezy.com/system/resources/thumbnails/008/058/793/small_2x/abstract-blur-with-bokeh-light-for-background-usage-vector.jpg') no-repeat center center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.form-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity as needed */
+    z-index: 1;
+}
+
+.login-signup-card {
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 2;
+}
+
+/* src/components/Dashboard.css */
+.dashboard-container {
+    padding: 20px;
+}
+
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.navbar {
+    margin-bottom: 20px;
+}
+
+
+/* src/components/OTPVerification.css */
+.otp-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f2f5;
+}
+
+.otp-card {
+    width: 100%;
+    max-width: 500px;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.otp-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.otp-logo {
+    width: 80px;
+    margin-bottom: 1rem;
+}
+
+.otp-input {
+    text-align: center;
+    font-size: 1.5rem;
+    letter-spacing: 0.3rem;
+}
+
+.otp-button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.resend-otp {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #ff4500;
+}
+
+.resend-otp span {
+    font-weight: bold;
+}
+
+
+/* src/components/MonthlyIncome.css */
+.monthly-income-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f2f5;
+}
+
+.monthly-income-card {
+    width: 100%;
+    min-width: 500px;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.total-monthly-income {
+    margin-top: 1rem;
+    text-align: left;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
