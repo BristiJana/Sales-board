@@ -3,20 +3,22 @@ import { Container, Row, Col, Card, Form, Button, InputGroup } from 'react-boots
 import { useNavigate } from 'react-router-dom';
 import '../assets/style.css';
 
-const MonthlyIncome = () => {
+const LivingExpense= () => {
     const [salary, setSalary] = useState();
     const [businessIncome, setBusinessIncome] = useState();
     const [otherIncome, setOtherIncome] = useState();
     const [familySupport, setFamilySupport] = useState();
+    const [otherIncome1, setOtherIncome1] = useState();
+    const [familySupport1, setFamilySupport1] = useState();
     const navigate = useNavigate();
 
-    const totalMonthlyIncome = salary + businessIncome + otherIncome + familySupport;
+    const totalMonthlyIncome = salary + businessIncome + otherIncome + familySupport+otherIncome1+familySupport1;
 
     const handleOtpSubmit = (e) => {
         e.preventDefault();
         // Verify OTP logic
         // If OTP is correct, redirect to dashboard or another page
-        navigate('/sales-board');
+        navigate('/life-exp');
     };
     return (
         <Container className="monthly-income-container">
@@ -24,10 +26,10 @@ const MonthlyIncome = () => {
                 <Col md={10} className="d-flex justify-content-center">
                     <Card className="monthly-income-card">
                         <Card.Body>
-                            <h3>Monthly Income</h3>
-                            <Form >
+                            <h3>Living Expenses</h3>
+                            <Form>
                                 <Form.Group controlId="formSalary">
-                                    <Form.Label>Salary</Form.Label>
+                                    <Form.Label>Rent/Maintenance</Form.Label>
                                     <InputGroup>
                                         <InputGroup.Text>₹</InputGroup.Text>
                                         <Form.Control
@@ -38,7 +40,7 @@ const MonthlyIncome = () => {
                                     </InputGroup>
                                 </Form.Group>
                                 <Form.Group controlId="formBusinessIncome">
-                                    <Form.Label>Business Income</Form.Label>
+                                    <Form.Label>Grocery Expenses</Form.Label>
                                     <InputGroup>
                                         <InputGroup.Text>₹</InputGroup.Text>
                                         <Form.Control
@@ -49,7 +51,7 @@ const MonthlyIncome = () => {
                                     </InputGroup>
                                 </Form.Group>
                                 <Form.Group controlId="formOtherIncome">
-                                    <Form.Label>Other Income</Form.Label>
+                                    <Form.Label>Electricity Bill</Form.Label>
                                     <InputGroup>
                                         <InputGroup.Text>₹</InputGroup.Text>
                                         <Form.Control
@@ -60,7 +62,7 @@ const MonthlyIncome = () => {
                                     </InputGroup>
                                 </Form.Group>
                                 <Form.Group controlId="formFamilySupport">
-                                    <Form.Label>Family Support</Form.Label>
+                                    <Form.Label>Gas Bill</Form.Label>
                                     <InputGroup>
                                         <InputGroup.Text>₹</InputGroup.Text>
                                         <Form.Control
@@ -70,8 +72,30 @@ const MonthlyIncome = () => {
                                         />
                                     </InputGroup>
                                 </Form.Group>
+                                <Form.Group controlId="formOtherIncome">
+                                    <Form.Label>Phone Bill</Form.Label>
+                                    <InputGroup>
+                                        <InputGroup.Text>₹</InputGroup.Text>
+                                        <Form.Control
+                                            type="number"
+                                            value={otherIncome1}
+                                            onChange={(e) => setOtherIncome1(Number(e.target.value))}
+                                        />
+                                    </InputGroup>
+                                </Form.Group>
+                                <Form.Group controlId="formFamilySupport">
+                                    <Form.Label>Other Utility</Form.Label>
+                                    <InputGroup>
+                                        <InputGroup.Text>₹</InputGroup.Text>
+                                        <Form.Control
+                                            type="number"
+                                            value={familySupport1}
+                                            onChange={(e) => setFamilySupport1(Number(e.target.value))}
+                                        />
+                                    </InputGroup>
+                                </Form.Group>
                                 <div className="total-monthly-income">
-                                    <p className='mb-0'>Total Monthly Income: ₹{totalMonthlyIncome.toFixed(2)}</p>
+                                    <p className='mb-0'>Total Living Expenses: ₹{totalMonthlyIncome.toFixed(2)}</p>
                                 </div>
                                 <Button variant="primary" className="mt-3" style={{ paddingLeft: "60px", paddingRight: "60px" }} onClick={handleOtpSubmit}>
                                     Next
@@ -85,4 +109,4 @@ const MonthlyIncome = () => {
     );
 };
 
-export default MonthlyIncome;
+export default LivingExpense;

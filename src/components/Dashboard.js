@@ -12,6 +12,10 @@ const Dashboard = () => {
     const [monthlyIncome, setMonthlyIncome] = useState('');
 
     const navigate = useNavigate();
+    const handleSet = () => {
+        // Handle logout logic
+        navigate('/profile');
+    };
 
     const handleLogout = () => {
         // Handle logout logic
@@ -53,8 +57,9 @@ useEffect(()=>{
                                 <Dropdown.Toggle variant="dark" id="dropdown-basic">
                                     <FaUserCircle size={24} />
                                 </Dropdown.Toggle>
-
+                               
                                 <Dropdown.Menu>
+                                <Dropdown.Item onClick={handleSet}>Setting</Dropdown.Item>
                                     <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
@@ -99,7 +104,7 @@ useEffect(()=>{
                                             <Form.Label>Total Income</Form.Label>
                                             <InputGroup>
                                                 <InputGroup.Text>₹</InputGroup.Text>
-                                                <Form.Control type="number" placeholder="0" readOnly />
+                                                <Form.Control type="number" placeholder="0"  />
                                             </InputGroup>
                                         </Form.Group>
                                     </Row>
@@ -122,7 +127,7 @@ useEffect(()=>{
                                             <Form.Label>Total Expenses</Form.Label>
                                             <InputGroup>
                                                 <InputGroup.Text>₹</InputGroup.Text>
-                                                <Form.Control type="number" placeholder="0" readOnly />
+                                                <Form.Control type="number" placeholder="0"/>
                                             </InputGroup>
                                         </Form.Group>
                                     </Row>
@@ -143,7 +148,7 @@ useEffect(()=>{
                                         </Form.Group>
                                         <Form.Group as={Col} controlId="formTotalSecuredLoanEMI">
                                             <Form.Label>Total Secured Loan EMI</Form.Label>
-                                            <Form.Control type="number" placeholder="0" readOnly />
+                                            <Form.Control type="number" placeholder="0"  />
                                         </Form.Group>
                                     </Row>
                                     <Row className="mb-3">

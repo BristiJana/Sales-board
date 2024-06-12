@@ -1,4 +1,8 @@
 /* src/components/HomePage.css */
+
+body{
+    background-color: #f0f2f5;
+}
 .hero-section {
     background: url('https://img.freepik.com/free-vector/halftone-background-with-circles_23-2148907689.jpg') no-repeat center center;
     background-size: cover;
@@ -104,13 +108,12 @@
 }
 
 
-/* src/components/OTPVerification.css */
 .otp-container {
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f0f2f5;
+    
 }
 
 .otp-card {
@@ -144,19 +147,6 @@
     align-items: center;
 }
 
-.resend-otp {
-    text-align: center;
-    margin-top: 1rem;
-    font-size: 0.9rem;
-    color: #ff4500;
-}
-
-.resend-otp span {
-    font-weight: bold;
-}
-
-
-/* src/components/MonthlyIncome.css */
 .monthly-income-container {
     height: 100vh;
     display: flex;
@@ -167,7 +157,7 @@
 
 .monthly-income-card {
     width: 100%;
-    min-width: 500px;
+    max-width: 600px;
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -178,4 +168,243 @@
     text-align: left;
     font-size: 1.2rem;
     font-weight: bold;
+}
+
+.budget-information-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa;
+}
+
+.budget-information-card {
+    width: 100%;
+    max-width: 1200px; /* Increase the max-width to fit the table */
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+}
+
+.loan-table th,
+.loan-table td {
+    vertical-align: middle;
+    text-align: center;
+}
+
+h2 {
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
+
+h3 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+h5 {
+    font-weight: bold;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.table-bordered th,
+.table-bordered td {
+    border: 1px solid #dee2e6;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.075);
+}
+
+.form-control {
+    text-align: center;
+}
+
+/* src/assets/style.css */
+.settlement-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa;
+    padding: 20px; /* Add padding to ensure spacing from the edges */
+}
+
+.settlement-card {
+    width: 100%;
+    max-width: 800px; /* Adjust max-width as needed */
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    margin: 20px; /* Add margin for spacing between cards if needed */
+    overflow-y: auto; /* Ensure the content is scrollable if it overflows */
+}
+
+
+hr {
+    margin: 2rem 0;
+}
+
+
+.modiclass{
+margin-top: 40px;
+margin-bottom: 40px;
+}
+
+/* src/assets/activity-style.css */
+.activity-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #f6f8f9 0%, #e9ecef 100%);
+    padding: 10px;
+    margin-top: 30px;
+}
+
+.activity-card {
+    width: 90%;
+    
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+    margin: 20px;
+    overflow-y: auto;
+   
+}
+
+.activity-card h2 {
+    font-weight: bold;
+    font-size: 2rem;
+    color: #343a40;
+    margin-bottom: 1.5rem;
+}
+
+.activity-card p {
+    font-size: 1.1rem;
+    color: #6c757d;
+    margin-bottom: 1.5rem;
+}
+
+.activity-card h3 {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #495057;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 2rem;
+}
+
+.form-group label {
+    font-weight: bold;
+    font-size: 1rem;
+    color: #495057;
+    margin-bottom: 0.5rem;
+}
+
+.form-control {
+    border: 2px solid #ced4da;
+    border-radius: 5px;
+    font-size: 1rem;
+    padding: 10px;
+}
+
+.form-control:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+
+button.generate-report {
+    background-color: #28a745;
+    color: white;
+    border: none;
+}
+
+button.generate-report:hover {
+    background-color: #218838;
+}
+
+button.send-payment {
+    background-color: #007bff;
+    color: white;
+    border: none;
+}
+
+button.send-payment:hover {
+    background-color: #0056b3;
+}
+
+button.activity-button {
+    background-color: #ffc107;
+    color: black;
+    border: none;
+}
+
+button.activity-button:hover {
+    background-color: #e0a800;
+}
+
+.activity-card hr {
+    margin: 2rem 0;
+    border-top: 2px solid #dee2e6;
+}
+
+
+/* Profile Page CSS */
+.profile-container {
+    padding: 20px;
+    background-color: #f8f9fa;
+}
+
+.profile-form {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.profile-form h1 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.profile-form .form-group {
+    margin-bottom: 20px;
+}
+
+.profile-form label {
+    font-weight: 500;
+}
+
+.profile-form input[type="text"],
+.profile-form input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+}
+
+.profile-form button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.profile-form button:last-child {
+    margin-right: 0;
 }

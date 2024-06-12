@@ -1,15 +1,24 @@
-// src/components/OTPVerification.js
 import React, { useState } from 'react';
 import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import '../assets/style.css';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const OTPVerification = () => {
     const [otp, setOtp] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('+91-8289039820');
     const navigate = useNavigate();
 
     const handleOtpChange = (e) => {
         setOtp(e.target.value);
+    };
+
+    const handleEditPhoneNumber = () => {
+        const newPhoneNumber = prompt('Enter new phone number:', phoneNumber);
+        if (newPhoneNumber) {
+            setPhoneNumber(newPhoneNumber);
+        }
     };
 
     const handleOtpSubmit = (e) => {
@@ -20,16 +29,24 @@ const OTPVerification = () => {
     };
 
     return (
-        <Container fluid className="otp-container">
-            <Row className="justify-content-center align-items-center h-100 w-100">
-                <Col md={6}>
+        <Container className="otp-container">
+            <Row className="justify-content-center align-items-center w-100 h-100">
+                <Col md={6} className="d-flex justify-content-center">
                     <Card className="otp-card">
                         <Card.Body>
                             <div className="otp-header">
                                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNGaADCkZwbprPNGJbt1CGk-_vCGUYe8eYWA&s" alt="Brand Logo" className="otp-logo" />
                                 <h3>OTP Verification</h3>
                                 <p>Please enter the OTP sent to your number:</p>
-                                <h5>+91-8289039820 <i className="fas fa-edit"></i></h5>
+                                
+                                <h5>
+    {phoneNumber}{' '}
+    <FontAwesomeIcon icon={faEdit} 
+        onClick={handleEditPhoneNumber}
+        
+        onMouseEnter={(e) => e.target.style.visibility = 'visible'}
+    />
+</h5>
                             </div>
                             <Form onSubmit={handleOtpSubmit}>
                                 <Form.Group controlId="formOtp">
@@ -43,12 +60,9 @@ const OTPVerification = () => {
                                     />
                                 </Form.Group>
                                 <Button type="submit" variant="primary" className="mt-3 otp-button">
-                                    Confirm <i className="fas fa-paper-plane"></i>
+                                    Confirm
                                 </Button>
                             </Form>
-                            {/* <div className="resend-otp">
-                                Resend OTP in <span>20 Sec</span>
-                            </div> */}
                         </Card.Body>
                     </Card>
                 </Col>
