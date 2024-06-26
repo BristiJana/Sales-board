@@ -1,88 +1,106 @@
-import React, { useState } from 'react';
-import { Container, Row, Col, Card, Form, Button, InputGroup } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Container, Row, Col, Button, Table, Navbar, Nav, Dropdown } from 'react-bootstrap';
+import { FaUserCircle } from 'react-icons/fa';
+import { useLocation, useNavigate } from 'react-router-dom';
 import '../assets/style.css';
 
-const SalesBoard = () => {
-    const [salary, setSalary] = useState();
-    const [businessIncome, setBusinessIncome] = useState();
-    const [otherIncome, setOtherIncome] = useState();
-    const [familySupport, setFamilySupport] = useState();
+const StepThreePage = () => {
+    const { state } = useLocation();
+    const { incomeInfo } = state || { incomeInfo: {} };
     const navigate = useNavigate();
 
-    const totalMonthlyIncome = salary + businessIncome + otherIncome + familySupport;
+    const monthlyTakeHomeIncome = incomeInfo.monthlyTakeHomeIncome || 0;
+    const securedLoanEMI = incomeInfo.securedLoanEMI || 0;
+    const livingExpenses = incomeInfo.livingExpenses || 0;
+    const lifestyleExpenses = incomeInfo.lifestyleExpenses || 0;
 
-    const handleOtpSubmit = (e) => {
-        e.preventDefault();
-        // Verify OTP logic
-        // If OTP is correct, redirect to dashboard or another page
+    const totalFundsForDebtSolution = monthlyTakeHomeIncome - (securedLoanEMI + livingExpenses + lifestyleExpenses);
+    const diPercentage = totalFundsForDebtSolution > 0 ? ((totalFundsForDebtSolution / monthlyTakeHomeIncome) * 100).toFixed(2) : 0;
+
+    const handleSet = () => {
+        navigate('/profile');
+    };
+
+    const handleLogout = () => {
+        navigate('/login-signup');
+    };
+
+    const navigateToStepTwo = () => {
         navigate('/living-exp');
     };
+
     return (
-        <Container className="monthly-income-container">
-            <Row className="justify-content-center align-items-center w-100 h-100">
-                <Col md={10} className="d-flex justify-content-center">
-                    <Card className="monthly-income-card">
-                        <Card.Body>
-                            <h3>Secured Loan EMI</h3>
-                            <Form>
-                                <Form.Group controlId="formSalary">
-                                    <Form.Label>Auto Loan</Form.Label>
-                                    <InputGroup>
-                                        <InputGroup.Text>₹</InputGroup.Text>
-                                        <Form.Control
-                                            type="number"
-                                            value={salary}
-                                            onChange={(e) => setSalary(Number(e.target.value))}
-                                        />
-                                    </InputGroup>
-                                </Form.Group>
-                                <Form.Group controlId="formBusinessIncome">
-                                    <Form.Label>Collateral Business Loan</Form.Label>
-                                    <InputGroup>
-                                        <InputGroup.Text>₹</InputGroup.Text>
-                                        <Form.Control
-                                            type="number"
-                                            value={businessIncome}
-                                            onChange={(e) => setBusinessIncome(Number(e.target.value))}
-                                        />
-                                    </InputGroup>
-                                </Form.Group>
-                                <Form.Group controlId="formOtherIncome">
-                                    <Form.Label>Loan Against Security</Form.Label>
-                                    <InputGroup>
-                                        <InputGroup.Text>₹</InputGroup.Text>
-                                        <Form.Control
-                                            type="number"
-                                            value={otherIncome}
-                                            onChange={(e) => setOtherIncome(Number(e.target.value))}
-                                        />
-                                    </InputGroup>
-                                </Form.Group>
-                                <Form.Group controlId="formFamilySupport">
-                                    <Form.Label>Housing Loan</Form.Label>
-                                    <InputGroup>
-                                        <InputGroup.Text>₹</InputGroup.Text>
-                                        <Form.Control
-                                            type="number"
-                                            value={familySupport}
-                                            onChange={(e) => setFamilySupport(Number(e.target.value))}
-                                        />
-                                    </InputGroup>
-                                </Form.Group>
-                                <div className="total-monthly-income">
-                                    <p className='mb-0'>Total Secured Loan EMI: ₹{totalMonthlyIncome.toFixed(2)}</p>
-                                </div>
-                                <Button variant="primary" className="mt-3" style={{ paddingLeft: "60px", paddingRight: "60px" }} onClick={handleOtpSubmit}>
-                                    Next
-                                </Button>
-                            </Form>
-                        </Card.Body>
-                    </Card>
-                </Col>
-            </Row>
-        </Container>
+        <>
+            <Navbar bg="dark" variant="dark" expand="lg">
+                <Container>
+                    <Navbar.Brand href="#home">Debt Free Solutions</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav">
+                        <Nav className="me-auto"></Nav>
+                        <Nav>
+                            <Dropdown>
+                                <Dropdown.Toggle variant="dark" id="dropdown-basic">
+                                    <FaUserCircle size={24} />
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu>
+                                    <Dropdown.Item onClick={handleSet}>Setting</Dropdown.Item>
+                                    <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
+
+            <Container fluid className="summary-container text-center text-white">
+                <Row className="justify-content-center">
+                    <Col md={8}>
+                        <h1 className="summary-heading">Summary of Income & Expenditure Information</h1>
+
+                        <Table striped bordered hover className="mt-3 text-white mb-5">
+                            <thead>
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Amount (INR)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Monthly Take Home Income</td>
+                                    <td>{monthlyTakeHomeIncome.toFixed(2)}</td>
+                                </tr>
+                                <tr>
+                                    <td>Secured Loan EMI</td>
+                                    <td>{securedLoanEMI.toFixed(2)}</td>
+                                </tr>
+                                <tr>
+                                    <td>Living Expenses</td>
+                                    <td>{livingExpenses.toFixed(2)}</td>
+                                </tr>
+                                <tr>
+                                    <td>Lifestyle Expenses</td>
+                                    <td>{lifestyleExpenses.toFixed(2)}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Total Funds Available for Debt Solution (Disposable Income – DI)</strong></td>
+                                    <td><strong>{totalFundsForDebtSolution.toFixed(2)}</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>% of Available Income</strong></td>
+                                    <td><strong>{diPercentage}%</strong></td>
+                                </tr>
+                            </tbody>
+                        </Table>
+
+                        <Button variant="primary" className="mt-4" onClick={navigateToStepTwo}>
+                            Continue to Final Step
+                        </Button>
+                    </Col>
+                </Row>
+            </Container>
+        </>
     );
 };
 
-export default SalesBoard;
+export default StepThreePage;
+

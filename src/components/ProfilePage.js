@@ -66,7 +66,7 @@ const ProfilePage = () => {
                             <Form.Control type="text" value={city} onChange={(e) => setCity(e.target.value)} />
                         </Form.Group>
                         <div className='mt-4'>
-                        <Button variant="primary"  onClick={handleSave}>Save</Button>{' '}
+                        <Button variant="primary" style={{marginTop:"0px", fontSize:"15px",paddingTop:"8px",paddingBottom:"8px"}} onClick={handleSave}>Save</Button>{' '}
                         <Button variant="secondary" onClick={handleCancel}>Cancel</Button></div>
                     </Form>
                 </Col>

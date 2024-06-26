@@ -1,59 +1,45 @@
+// FinalPage.jsx
+
 import React from 'react';
-import { Container, Card, Button, Form } from 'react-bootstrap';
-import '../assets/style.css';
-import { useNavigate } from 'react-router-dom';
-const ActivityPage = () => {
-    const handleOptionSelect = (event) => {
-        console.log(event.target.value);
+import { Container, Row, Col, Button } from 'react-bootstrap';
+import { FaDownload } from 'react-icons/fa';
+import '../assets/style.css'; // Ensure your CSS file path is correct
+
+const FinalPage = () => {
+    const handleDownloadFile = () => {
+        // Handle download file logic here
+        alert('File download functionality will be implemented here.');
     };
-    const navigate = useNavigate();
+
+    const handleUploadFile = () => {
+        // Handle upload file logic here
+        alert('File upload functionality will be implemented here.');
+    };
+
     return (
-        <Container fluid className="activity-container">
-            <Card className="activity-card" >
-                <Card.Body>
-                <div style={{ textAlign: "center" }}>
-    <img src="https://i.pinimg.com/originals/77/21/bf/7721bf941fa2021b2a34f0b015c2ffd7.gif" alt="Impressive GIF" />
-</div>
-                    <p className="text-center">You have successfully set up all your data and information.</p>
-                    <hr />
-                    <h3 className="text-center">Activity</h3>
-                    <Form.Group style={{margin: "0 auto", width: "40%"}}>
-                        <Form.Label>Choose your next action:</Form.Label>
-                        <Form.Control as="select" onChange={handleOptionSelect}>
-                            <option>Call Interested</option>
-                            <option>Call Not Interested</option>
-                            <option>Call Later</option>
-                        </Form.Control>
-                        <Button variant="success" className="generate-report w-100" style={{margin: "0 auto", width: "40%",marginTop:"40px"}}>
-                        Generate Report
+        <Container fluid className="final-page-container text-center">
+            <Row className="justify-content-center">
+                <Col md={8}>
+                    <h1 className='mb-4'>Enroll now for only ₹599 to become debt free</h1>
+                    <ul className="final-page-list">
+                        <li>Settle your debts from 50% plus discount</li>
+                        <li>Protection from Creditors Harassment</li>
+                        <li>Legal cover from our in-house advocates</li>
+                        <li>Dedicated relationship manager</li>
+                        <li>Money protected in a Trust account</li>
+                        <li>Client dashboard</li>
+                    </ul>
+                    <Button variant="primary" className="btn-lg mb-4" onClick={handleDownloadFile}>
+                        Start Now Pay Rs 599 
                     </Button>
-                    </Form.Group>
-
-                    
-
-                    <hr />
-
-                    <h3 className="text-center">Payment</h3>
-                    <Form.Group style={{margin: "0 auto", width: "40%"}}>
-                        <Form.Label>Send Payment Link</Form.Label>
-                        <Button variant="primary" className="send-payment w-100">
-                            Send Payment Link
-                        </Button>
-                    </Form.Group>
-
-                    <h2 className="text-center mt-4">Payment Received!</h2>
-                    <p className="text-center">Amount: $1000</p>
-                    <p className="text-center">EMI Left: None</p>
-                    <div style={{ textAlign: "center" }}>
-    <Button variant="primary" onClick={() => navigate('/dashboard')}>
-        Back to Dashboard
-    </Button>
-</div>
-
-                </Card.Body>
-            </Card>
+                    <p className="upload-text">For us to process your application, you would need to download your credit file from Experian and upload it to us.</p>
+                    <Button variant="secondary" className="btn-lg" onClick={handleUploadFile}>
+                        Upload your Credit File <FaDownload className="ms-2" />
+                    </Button>
+                </Col>
+            </Row>
         </Container>
     );
 };
 
-export default ActivityPage;
+export default FinalPage;

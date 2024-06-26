@@ -1,167 +1,120 @@
-import React, { useState } from 'react';
-import { Container, Row, Col, Card, Table, Button, Form } from 'react-bootstrap';
+import React from 'react';
+import { Container, Row, Col, Button, Table, Navbar, Nav, Dropdown } from 'react-bootstrap';
+import { FaUserCircle } from 'react-icons/fa';
+import { useLocation, useNavigate } from 'react-router-dom';
 import '../assets/style.css';
-import { useNavigate } from 'react-router-dom';
-const BudgetInformation = () => {
-    const [loans, setLoans] = useState([{
-        id: 1,
-        loanID: '',
-        loanCompanyName: '',
-        loanType: '',
-        loanAmount: '',
-        emi: '',
-        lastPaymentDate: '',
-        outstandingLoanAmount: ''
-    }]);
 
-    const addLoanRow = () => {
-        setLoans([...loans, {
-            id: loans.length + 1,
-            loanID: '',
-            loanCompanyName: '',
-            loanType: '',
-            loanAmount: '',
-            emi: '',
-            lastPaymentDate: '',
-            outstandingLoanAmount: ''
-        }]);
-    };
+const BudgetInformation = () => {
+    const { state } = useLocation();
+    const { debts } = state || { debts: [] };
     const navigate = useNavigate();
 
-    const handleNext = () => {
-        navigate('/settlement');
-    };
-    const deleteLoanRow = (index) => {
-        setLoans(loans.filter((_, i) => i !== index));
+    const priorityDebts = debts.filter(debt => debt.debtType.toLowerCase() === 'priority');
+    const unsecuredDebts = debts.filter(debt => debt.debtType.toLowerCase() !== 'priority');
+
+    const sum = (arr, field) => arr.reduce((acc, item) => acc + parseFloat(item[field] || 0), 0);
+
+    const priorityDebtsTotal = sum(priorityDebts, 'debtOutstanding');
+    const unsecuredDebtsTotal = sum(unsecuredDebts, 'debtOutstanding');
+    const totalDebtsOutstanding = priorityDebtsTotal + unsecuredDebtsTotal;
+
+    const priorityEmiTotal = sum(priorityDebts, 'emi');
+    const unsecuredEmiTotal = sum(unsecuredDebts, 'emi');
+    const totalMonthlyEmi = priorityEmiTotal + unsecuredEmiTotal;
+
+    const handleSet = () => {
+        navigate('/profile');
     };
 
-    const handleLoanChange = (index, field, value) => {
-        const newLoans = loans.map((loan, i) => {
-            if (i === index) {
-                return { ...loan, [field]: value };
-            }
-            return loan;
-        });
-        setLoans(newLoans);
+    const handleLogout = () => {
+        navigate('/login-signup');
     };
 
-    const totalOutstandingLoanAmount = loans.reduce((total, loan) => total + parseFloat(loan.outstandingLoanAmount || 0), 0);
+    const navigateToStepTwo = () => {
+        navigate('/monthly-income');
+    };
 
     return (
-        <Container fluid className="budget-information-container">
-            <Row className="justify-content-center">
-                <Col md={12}>
-                    <Card className="budget-information-card">
-                        <Card.Body>
-                            <h2 className="text-center">Budget Information</h2>
-                            <hr />
-                            <Row>
-                                <Col md={6}>
-                                    <h5>Total Monthly Income</h5>
-                                    <p>₹ Amount</p>
-                                </Col>
-                                <Col md={6}>
-                                    <h5>Total Secured Loan</h5>
-                                    <p>₹ Amount</p>
-                                </Col>
-                                <Col md={6}>
-                                    <h5>Total Living Expenses</h5>
-                                    <p>₹ Amount</p>
-                                </Col>
-                                <Col md={6}>
-                                    <h5>Total Lifestyle Expenses</h5>
-                                    <p>₹ Amount</p>
-                                </Col>
-                                <Col md={12}>
-                                    <h5>Fund Available For DRP</h5>
-                                    <p>₹ Amount</p>
-                                </Col>
-                            </Row>
-                            <hr />
-                            <h3>Bank/Loan Details</h3>
-                            <Table striped bordered hover className="loan-table">
-                                <thead>
-                                    <tr>
-                                        <th>Loan ID/Number</th>
-                                        <th>Loan Company Name</th>
-                                        <th>Loan Type</th>
-                                        <th>Loan Amount (INR)</th>
-                                        <th>EMI (INR)</th>
-                                        <th>Last Payment Date</th>
-                                        <th>Outstanding Loan Amount (INR)</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {loans.map((loan, index) => (
-                                        <tr key={loan.id}>
-                                            <td>
-                                                <Form.Control
-                                                    type="text"
-                                                    value={loan.loanID}
-                                                    onChange={(e) => handleLoanChange(index, 'loanID', e.target.value)}
-                                                />
-                                            </td>
-                                            <td>
-                                                <Form.Control
-                                                    type="text"
-                                                    value={loan.loanCompanyName}
-                                                    onChange={(e) => handleLoanChange(index, 'loanCompanyName', e.target.value)}
-                                                />
-                                            </td>
-                                            <td>
-                                                <Form.Control
-                                                    type="text"
-                                                    value={loan.loanType}
-                                                    onChange={(e) => handleLoanChange(index, 'loanType', e.target.value)}
-                                                />
-                                            </td>
-                                            <td>
-                                                <Form.Control
-                                                    type="number"
-                                                    value={loan.loanAmount}
-                                                    onChange={(e) => handleLoanChange(index, 'loanAmount', e.target.value)}
-                                                />
-                                            </td>
-                                            <td>
-                                                <Form.Control
-                                                    type="number"
-                                                    value={loan.emi}
-                                                    onChange={(e) => handleLoanChange(index, 'emi', e.target.value)}
-                                                />
-                                            </td>
-                                            <td>
-                                                <Form.Control
-                                                    type="date"
-                                                    value={loan.lastPaymentDate}
-                                                    onChange={(e) => handleLoanChange(index, 'lastPaymentDate', e.target.value)}
-                                                />
-                                            </td>
-                                            <td>
-                                                <Form.Control
-                                                    type="number"
-                                                    value={loan.outstandingLoanAmount}
-                                                    onChange={(e) => handleLoanChange(index, 'outstandingLoanAmount', e.target.value)}
-                                                />
-                                            </td>
-                                            <td>
-                                                <Button variant="danger" className='mt-0' onClick={() => deleteLoanRow(index)}>Delete</Button>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </Table>
-                            <Button variant="success" onClick={addLoanRow}>
-                                Add More Loan Details
-                            </Button>
-                            <hr />
-                            <h5>Total Outstanding Loan Amount: ₹{totalOutstandingLoanAmount.toFixed(2)}</h5>
-                            <Button variant="primary" onClick={handleNext}>Next</Button>
-                        </Card.Body>
-                    </Card>
-                </Col>
-            </Row>
-        </Container>
+        <>
+            <Navbar bg="dark" variant="dark" expand="lg">
+                <Container>
+                    <Navbar.Brand href="#home">Debt Free Solutions</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav">
+                        <Nav className="me-auto"></Nav>
+                        <Nav>
+                            <Dropdown>
+                                <Dropdown.Toggle variant="dark" id="dropdown-basic">
+                                    <FaUserCircle size={24} />
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu>
+                                    <Dropdown.Item onClick={handleSet}>Setting</Dropdown.Item>
+                                    <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
+
+            <Container fluid className="summary-container text-center text-white">
+                <Row className="justify-content-center">
+                    <Col md={8}>
+                        <h1 className="summary-heading">Summary of Debts</h1>
+
+                        <Table striped bordered hover className="mt-3 text-white mb-5">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Total Amount (INR)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Priority Debts (Secured)</td>
+                                    <td>{priorityDebtsTotal.toFixed(2)}</td>
+                                </tr>
+                                <tr>
+                                    <td>Unsecured Debts</td>
+                                    <td>{unsecuredDebtsTotal.toFixed(2)}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Total Debts Outstanding</strong></td>
+                                    <td><strong>{totalDebtsOutstanding.toFixed(2)}</strong></td>
+                                </tr>
+                            </tbody>
+                        </Table>
+
+                        <Table striped bordered hover className="mt-3 text-white">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Total EMI (INR)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Priority EMI</td>
+                                    <td>{priorityEmiTotal.toFixed(2)}</td>
+                                </tr>
+                                <tr>
+                                    <td>Unsecured EMI</td>
+                                    <td>{unsecuredEmiTotal.toFixed(2)}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Total Monthly EMI</strong></td>
+                                    <td><strong>{totalMonthlyEmi.toFixed(2)}</strong></td>
+                                </tr>
+                            </tbody>
+                        </Table>
+
+                        <Button variant="primary" className="mt-4" onClick={navigateToStepTwo}>
+                            Continue to Step Two
+                        </Button>
+                    </Col>
+                </Row>
+            </Container>
+        </>
     );
 };
 

@@ -1,8 +1,7 @@
-/* src/components/HomePage.css */
-
-body{
+body {
     background-color: #f0f2f5;
 }
+
 .hero-section {
     background: url('https://img.freepik.com/free-vector/halftone-background-with-circles_23-2148907689.jpg') no-repeat center center;
     background-size: cover;
@@ -18,13 +17,37 @@ body{
     font-size: 1.5rem;
     margin-bottom: 30px;
 }
+
 .card-img-top {
     height: 200px;  /* Set the height you want for your images */
     object-fit: cover;  /* Ensure the image covers the area without stretching */
 }
 
+@media (max-width: 767.98px) {
+    .hero-section {
+        padding: 100px 0;
+    }
+
+    .hero-section h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-section p {
+        font-size: 1.2rem;
+    }
+}
 
 /* src/components/LoginSignupPage.css */
+.head {
+    margin-bottom: 30px;
+}
+
+.head-input {
+    margin-bottom: 16px;
+    font-weight: 700;
+    font-size: 18px;
+}
+
 .login-signup-container {
     height: 100vh;
     display: flex;
@@ -49,6 +72,7 @@ body{
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1;
+    text-align: center;
 }
 
 .form-col {
@@ -89,18 +113,81 @@ body{
     z-index: 2;
 }
 
+.otp-inputs {
+    display: flex;
+    justify-content: space-between;
+}
+
+.otp-input {
+    width: 3rem;
+    text-align: center;
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+}
+
+.otp-input:last-child {
+    margin-right: 0;
+}
+
+
+  
 /* src/components/Dashboard.css */
 .dashboard-container {
+    padding: 40px 20px;
+    background-color: #343a40;
+    min-height: 100vh;
+}
+
+.dashboard-heading {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.dashboard-subheading {
+    font-size: 1.5rem;
+    margin-bottom: 40px;
+    animation: fadeIn 2s ease-in-out;
+}
+
+.step-card {
+    background-color: #495057;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
     padding: 20px;
+    animation: fadeIn 2.5s ease-in-out;
+    transition: transform 0.3s ease-in-out;
 }
 
-.card {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease-in-out;
-}
-
-.card:hover {
+.step-card:hover {
     transform: translateY(-5px);
+}
+
+.next-step-button {
+    padding: 15px 30px;
+    font-size: 1.25rem;
+    animation: fadeIn 3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@media (max-width: 768px) {
+    .dashboard-heading {
+        font-size: 2rem;
+    }
+
+    .dashboard-subheading {
+        font-size: 1.25rem;
+    }
+
+    .next-step-button {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
 }
 
 .navbar {
@@ -108,303 +195,396 @@ body{
 }
 
 
-.otp-container {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
+.debts-container {
+    padding: 40px 20px;
+    background-color: #343a40;
+    min-height: 100vh;
 }
 
-.otp-card {
-    width: 100%;
-    max-width: 500px;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.debts-heading {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    animation: fadeIn 1.5s ease-in-out;
 }
 
-.otp-header {
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
-.otp-logo {
-    width: 80px;
-    margin-bottom: 1rem;
-}
-
-.otp-input {
-    text-align: center;
+.debts-subheading {
     font-size: 1.5rem;
-    letter-spacing: 0.3rem;
+    margin-bottom: 40px;
+    animation: fadeIn 2s ease-in-out;
 }
 
-.otp-button {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.table {
+    background-color: #495057;
+    color: #fff;
+    animation: fadeIn 2.5s ease-in-out;
 }
 
-.monthly-income-container {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f0f2f5;
+.table thead th {
+    background-color: #6c757d;
+    color: #fff;
 }
 
-.monthly-income-card {
-    width: 100%;
-    max-width: 600px;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.table tbody tr {
+    background-color: #495057;
 }
 
-.total-monthly-income {
-    margin-top: 1rem;
-    text-align: left;
-    font-size: 1.2rem;
-    font-weight: bold;
+.table tbody tr:hover {
+    background-color: #6c757d;
 }
 
-.budget-information-container {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f8f9fa;
+.table input {
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    border-bottom: 1px solid #6c757d;
+    border-radius: 0;
 }
 
-.budget-information-card {
-    width: 100%;
-    max-width: 1200px; /* Increase the max-width to fit the table */
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #ffffff;
+.table input:focus {
+    box-shadow: none;
+    border-bottom: 1px solid #fff;
 }
 
-.loan-table th,
-.loan-table td {
-    vertical-align: middle;
-    text-align: center;
+.table .btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    animation: fadeIn 3s ease-in-out;
 }
 
-h2 {
-    font-weight: bold;
-    margin-bottom: 2rem;
+.table .btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
 }
 
-h3 {
-    margin-top: 2rem;
-    margin-bottom: 1rem;
+.button-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    animation: fadeIn 3s ease-in-out;
 }
 
-h5 {
-    font-weight: bold;
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
+.button-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
 }
 
-
-.table-striped tbody tr:nth-of-type(odd) {
-    background-color: rgba(0, 0, 0, 0.05);
+.summary-container {
+    padding: 40px 20px;
+    background-color: #343a40;
+    min-height: 100vh;
 }
 
-.table-bordered th,
-.table-bordered td {
-    border: 1px solid #dee2e6;
+.summary-heading {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    animation: fadeIn 1.5s ease-in-out;
 }
 
-.table-hover tbody tr:hover {
-    background-color: rgba(0, 0, 0, 0.075);
+.table {
+    background-color: #495057;
+    color: #fff;
+    animation: fadeIn 2s ease-in-out;
+}
+
+.table thead th {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.table tbody tr {
+    background-color: #495057;
+}
+
+.table tbody tr:hover {
+    background-color: #6c757d;
+}
+
+.step-two-container {
+    padding: 40px 20px;
+    background-color: #343a40;
+    min-height: 100vh;
+}
+
+.section-heading {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.income-section,
+.expenses-section {
+    margin-top: 40px;
+    animation: fadeIn 2s ease-in-out;
+}
+
+.form-label {
+    font-weight: 700;
+    color: #fff;
 }
 
 .form-control {
-    text-align: center;
-}
-
-/* src/assets/style.css */
-.settlement-container {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f8f9fa;
-    padding: 20px; /* Add padding to ensure spacing from the edges */
-}
-
-.settlement-card {
-    width: 100%;
-    max-width: 800px; /* Adjust max-width as needed */
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #ffffff;
-    margin: 20px; /* Add margin for spacing between cards if needed */
-    overflow-y: auto; /* Ensure the content is scrollable if it overflows */
-}
-
-
-hr {
-    margin: 2rem 0;
-}
-
-
-.modiclass{
-margin-top: 40px;
-margin-bottom: 40px;
-}
-
-/* src/assets/activity-style.css */
-.activity-container {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(135deg, #f6f8f9 0%, #e9ecef 100%);
-    padding: 10px;
-    margin-top: 30px;
-}
-
-.activity-card {
-    width: 90%;
-    
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    background-color: #ffffff;
-    margin: 20px;
-    overflow-y: auto;
-   
-}
-
-.activity-card h2 {
-    font-weight: bold;
-    font-size: 2rem;
-    color: #343a40;
-    margin-bottom: 1.5rem;
-}
-
-.activity-card p {
-    font-size: 1.1rem;
-    color: #6c757d;
-    margin-bottom: 1.5rem;
-}
-
-.activity-card h3 {
-    font-weight: bold;
-    font-size: 1.5rem;
-    color: #495057;
-    margin-bottom: 1.5rem;
-}
-
-.form-group {
-    margin-bottom: 2rem;
-}
-
-.form-group label {
-    font-weight: bold;
-    font-size: 1rem;
-    color: #495057;
-    margin-bottom: 0.5rem;
-}
-
-.form-control {
-    border: 2px solid #ced4da;
-    border-radius: 5px;
-    font-size: 1rem;
-    padding: 10px;
+    color: #fff;
 }
 
 .form-control:focus {
-    border-color: #80bdff;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    background-color: #495057;
+    color: #fff;
+    box-shadow: 0 0 0 0.25rem rgba(38, 143, 255, 0.5);
 }
 
-
-button.generate-report {
-    background-color: #28a745;
-    color: white;
-    border: none;
-}
-
-button.generate-report:hover {
-    background-color: #218838;
-}
-
-button.send-payment {
+.btn-primary {
     background-color: #007bff;
-    color: white;
-    border: none;
-}
-
-button.send-payment:hover {
-    background-color: #0056b3;
-}
-
-button.activity-button {
-    background-color: #ffc107;
-    color: black;
-    border: none;
-}
-
-button.activity-button:hover {
-    background-color: #e0a800;
-}
-
-.activity-card hr {
-    margin: 2rem 0;
-    border-top: 2px solid #dee2e6;
-}
-
-
-/* Profile Page CSS */
-.profile-container {
-    padding: 20px;
-    background-color: #f8f9fa;
-}
-
-.profile-form {
-    max-width: 600px;
-    margin: 0 auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.profile-form h1 {
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 20px;
-}
-
-.profile-form .form-group {
-    margin-bottom: 20px;
-}
-
-.profile-form label {
-    font-weight: 500;
-}
-
-.profile-form input[type="text"],
-.profile-form input[type="email"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-}
-
-.profile-form button {
+    border-color: #007bff;
     padding: 10px 20px;
-    border-radius: 5px;
-    margin-right: 10px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-top: 20px;
 }
 
-.profile-form button:last-child {
-    margin-right: 0;
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+    .section-heading {
+        font-size: 2rem;
+    }
+}
+
+.step-three-container {
+    padding: 40px 20px;
+    background-color: #343a40;
+    min-height: 100vh;
+}
+
+.section-heading {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.summary-section {
+    margin-top: 40px;
+    animation: fadeIn 2s ease-in-out;
+}
+
+.summary-details {
+    text-align: left;
+    margin-top: 30px;
+    font-size: 1.2rem;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-top: 20px;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+    .section-heading {
+        font-size: 2rem;
+    }
+}
+
+.debt-free-plans-container {
+    padding: 40px 20px;
+    background-color: #343a40;
+    min-height: 100vh;
+}
+
+.plans-heading {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #fff;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.plans-description {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    color: #fff;
+    animation: fadeIn 2s ease-in-out;
+}
+
+.plans-subheading {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #fff;
+}
+
+.plans-benefits-heading {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.plans-benefits-list {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    color: #fff;
+}
+
+/* Table styling */
+.plans-table {
+    background-color: #495057;
+    color: #fff;
+    margin-top: 40px;
+    animation: fadeIn 2.5s ease-in-out;
+}
+
+.plans-table thead th {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.plans-table tbody tr {
+    background-color: #495057;
+}
+
+.plans-table tbody tr:hover {
+    background-color: #6c757d;
+}
+
+/* Button styling */
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-top: 20px;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+    .plans-heading {
+        font-size: 2rem;
+    }
+
+    .plans-description {
+        font-size: 1.2rem;
+    }
+
+    .plans-subheading {
+        font-size: 1.6rem;
+    }
+
+    .plans-benefits-heading {
+        font-size: 1.4rem;
+    }
+
+    .plans-benefits-list {
+        font-size: 1rem;
+    }
+
+    .btn-primary {
+        font-size: 1rem;
+        padding: 10px 15px;
+    }
+}
+
+/* style.css */
+
+/* style.css */
+
+.final-page-container {
+    background-color: #f8f9fa; /* Light background color */
+    padding: 50px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.final-page-content {
+    max-width: 800px;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.final-page-list {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 30px;
+}
+
+.final-page-list li {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.upload-text {
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+.btn-lg {
+    font-size: 20px;
+    padding: 15px 40px;
+    margin-right: 10px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.btn-lg.mb-4 {
+    margin-bottom: 50px;
+}
+
+.btn-primary {
+    background-color: #007bff; /* Primary button color */
+    border-color: #007bff;
+    color: #ffffff; /* Text color */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Darker shade for hover effect */
+    border-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #6c757d; /* Secondary button color */
+    border-color: #6c757d;
+    color: #ffffff; /* Text color */
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268; /* Darker shade for hover effect */
+    border-color: #5a6268;
+}
+
+@media (max-width: 768px) {
+    .final-page-container {
+        padding: 40px 20px;
+    }
+
+    .final-page-content {
+        font-size: 16px;
+    }
+
+    .btn-lg {
+        font-size: 18px;
+        padding: 12px 30px;
+    }
+}
+
+.profile-container{
+    background-color: rgba(0, 0, 0, 0.5);
+    padding-top: 40px;
+    padding-bottom: 40px;
 }

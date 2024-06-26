@@ -9,11 +9,12 @@ const HomePage = () => {
     const handleGetStartedClick = () => {
         navigate('/login-signup');
     };
+
     return (
         <>
             <Navbar bg="dark" variant="dark" expand="lg">
                 <Container>
-                    <Navbar.Brand href="#home">MyApp</Navbar.Brand>
+                    <Navbar.Brand href="#home">Debt Free Solutions</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
@@ -29,8 +30,7 @@ const HomePage = () => {
             <Container className="hero-section text-center text-white">
                 <Row>
                     <Col>
-                        <h1>Welcome to MyApp</h1>
-                        <p>Your solution for awesome web applications</p>
+                        <h1>Welcome to Debt Free Solutions</h1>
                         <Button variant="primary" size="lg" onClick={handleGetStartedClick}>Get Started</Button>
                     </Col>
                 </Row>
@@ -78,6 +78,6 @@ const HomePage = () => {
             </Container>
         </>
     );
-}
+};
 
 export default HomePage;
