@@ -5,22 +5,14 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import '../assets/style.css';
 
 const BudgetInformation = () => {
-    const { state } = useLocation();
-    const { debts } = state || { debts: [] };
+    const location = useLocation();
+    const { totalOutstandingSecured, totalEMISecured, totalOutstandingUnsecured, totalEMIUnsecured } = location.state;
     const navigate = useNavigate();
 
-    const priorityDebts = debts.filter(debt => debt.debtType.toLowerCase() === 'priority');
-    const unsecuredDebts = debts.filter(debt => debt.debtType.toLowerCase() !== 'priority');
+    
+    const totalDebtsOutstanding = totalOutstandingSecured + totalOutstandingUnsecured;
 
-    const sum = (arr, field) => arr.reduce((acc, item) => acc + parseFloat(item[field] || 0), 0);
-
-    const priorityDebtsTotal = sum(priorityDebts, 'debtOutstanding');
-    const unsecuredDebtsTotal = sum(unsecuredDebts, 'debtOutstanding');
-    const totalDebtsOutstanding = priorityDebtsTotal + unsecuredDebtsTotal;
-
-    const priorityEmiTotal = sum(priorityDebts, 'emi');
-    const unsecuredEmiTotal = sum(unsecuredDebts, 'emi');
-    const totalMonthlyEmi = priorityEmiTotal + unsecuredEmiTotal;
+    const totalMonthlyEmi = totalEMISecured + totalEMIUnsecured;
 
     const handleSet = () => {
         navigate('/profile');
@@ -31,7 +23,12 @@ const BudgetInformation = () => {
     };
 
     const navigateToStepTwo = () => {
-        navigate('/monthly-income');
+        navigate('/monthly-income', {
+            state: {
+                totalDebtsOutstanding,
+                totalEMISecured
+            }
+        });
     };
 
     return (
@@ -72,11 +69,11 @@ const BudgetInformation = () => {
                             <tbody>
                                 <tr>
                                     <td>Priority Debts (Secured)</td>
-                                    <td>{priorityDebtsTotal.toFixed(2)}</td>
+                                    <td>{totalOutstandingSecured.toFixed(2)}</td>
                                 </tr>
                                 <tr>
                                     <td>Unsecured Debts</td>
-                                    <td>{unsecuredDebtsTotal.toFixed(2)}</td>
+                                    <td>{totalOutstandingUnsecured.toFixed(2)}</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Total Debts Outstanding</strong></td>
@@ -95,11 +92,11 @@ const BudgetInformation = () => {
                             <tbody>
                                 <tr>
                                     <td>Priority EMI</td>
-                                    <td>{priorityEmiTotal.toFixed(2)}</td>
+                                    <td>{totalEMISecured.toFixed(2)}</td>
                                 </tr>
                                 <tr>
                                     <td>Unsecured EMI</td>
-                                    <td>{unsecuredEmiTotal.toFixed(2)}</td>
+                                    <td>{totalEMIUnsecured.toFixed(2)}</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Total Monthly EMI</strong></td>

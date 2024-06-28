@@ -72,21 +72,16 @@ const LoginSignupPage = () => {
                     <h2 className="text-center mb-4">Login</h2>
                     <Form noValidate validated={validated} onSubmit={handleLoginSignup}>
                       <Form.Group controlId="formBasicEmail">
-                        <Form.Label>Email address</Form.Label>
-                        <Form.Control type="email" placeholder="Enter email" required />
-                        <Form.Control.Feedback type="invalid">Email is required.</Form.Control.Feedback>
+                        <Form.Label style={{color:"black"}}>Email/Phone Number</Form.Label>
+                        <Form.Control type="text" placeholder="Enter Email/Phone Number" required />
+                        <Form.Control.Feedback type="invalid">Email/Phone Number is required.</Form.Control.Feedback>
                       </Form.Group>
-                      <Form.Group controlId="formBasicMobile" className="mt-3">
-                        <Form.Label>Mobile number</Form.Label>
-                        <Form.Control
-                          type="text"
-                          placeholder="Enter mobile number"
-                          value={phoneNumber}
-                          onChange={handlePhoneNumberChange}
-                          required
-                        />
-                        <Form.Control.Feedback type="invalid">Mobile number is required.</Form.Control.Feedback>
+                      <Form.Group controlId="formBasicPassword">
+                        <Form.Label style={{color:"black"}}>Password</Form.Label>
+                        <Form.Control type="password" placeholder="Enter password" required />
+                        <Form.Control.Feedback type="invalid">Password is required.</Form.Control.Feedback>
                       </Form.Group>
+                     
                       <Button variant="primary" type="submit" className="w-100 mt-3">
                         Login
                       </Button>
@@ -103,17 +98,22 @@ const LoginSignupPage = () => {
                     <h2 className="text-center mb-4">Sign Up</h2>
                     <Form noValidate validated={validated} onSubmit={handleLoginSignup}>
                       <Form.Group controlId="formBasicName">
-                        <Form.Label>Name</Form.Label>
+                        <Form.Label style={{color:"black"}}>Name</Form.Label>
                         <Form.Control type="text" placeholder="Enter full name" required />
                         <Form.Control.Feedback type="invalid">Name is required.</Form.Control.Feedback>
                       </Form.Group>
-                      <Form.Group controlId="formBasicEmail" className="mt-3">
-                        <Form.Label>Email address</Form.Label>
+                      <Form.Group controlId="formBasicEmail" >
+                        <Form.Label style={{color:"black"}}>Email address</Form.Label>
                         <Form.Control type="email" placeholder="Enter email" required />
                         <Form.Control.Feedback type="invalid">Email is required.</Form.Control.Feedback>
                       </Form.Group>
-                      <Form.Group controlId="formBasicMobile" className="mt-3">
-                        <Form.Label>Mobile number</Form.Label>
+                      <Form.Group controlId="formBasicPassword">
+                        <Form.Label style={{color:"black"}}>Password</Form.Label>
+                        <Form.Control type="password" placeholder="Enter password" required />
+                        <Form.Control.Feedback type="invalid">Password is required.</Form.Control.Feedback>
+                      </Form.Group>
+                      <Form.Group controlId="formBasicMobile" >
+                        <Form.Label style={{color:"black"}}>Mobile number</Form.Label>
                         <Form.Control
                           type="text"
                           placeholder="Enter mobile number"
@@ -124,8 +124,8 @@ const LoginSignupPage = () => {
                         <Form.Control.Feedback type="invalid">Mobile number is required.</Form.Control.Feedback>
                       </Form.Group>
                       {otpEnabled && (
-                        <Form.Group controlId="formBasicOTP" className="mt-3">
-                          <Form.Label>OTP</Form.Label>
+                        <Form.Group controlId="formBasicOTP" >
+                          <Form.Label style={{color:"black"}}>OTP</Form.Label>
                           <div className="otp-inputs">
                             {otp.map((digit, idx) => (
                               <Form.Control

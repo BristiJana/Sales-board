@@ -5,14 +5,14 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import '../assets/style.css';
 
 const StepThreePage = () => {
-    const { state } = useLocation();
-    const { incomeInfo } = state || { incomeInfo: {} };
+    const location = useLocation();
+    const { totalDebtsOutstanding,totalEMISecured,totalIncome,totalLifestyleExpenses,totalLivingExpenses } = location.state;
     const navigate = useNavigate();
 
-    const monthlyTakeHomeIncome = incomeInfo.monthlyTakeHomeIncome || 0;
-    const securedLoanEMI = incomeInfo.securedLoanEMI || 0;
-    const livingExpenses = incomeInfo.livingExpenses || 0;
-    const lifestyleExpenses = incomeInfo.lifestyleExpenses || 0;
+    const monthlyTakeHomeIncome = totalIncome;
+    const securedLoanEMI = totalEMISecured;
+    const livingExpenses = totalLivingExpenses;
+    const lifestyleExpenses = totalLifestyleExpenses;
 
     const totalFundsForDebtSolution = monthlyTakeHomeIncome - (securedLoanEMI + livingExpenses + lifestyleExpenses);
     const diPercentage = totalFundsForDebtSolution > 0 ? ((totalFundsForDebtSolution / monthlyTakeHomeIncome) * 100).toFixed(2) : 0;
@@ -26,7 +26,11 @@ const StepThreePage = () => {
     };
 
     const navigateToStepTwo = () => {
-        navigate('/living-exp');
+        navigate('/living-exp',{
+            state: {
+                totalDebtsOutstanding
+            }
+        });
     };
 
     return (

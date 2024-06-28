@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Form, Button, Navbar, Nav, Dropdown } from "react-bootstrap";
 import { FaUserCircle } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 import "../assets/style.css";
 
 const MonthlyIncome = () => {
+  const location = useLocation();
+  const {totalDebtsOutstanding,totalEMISecured} = location.state;
   const [currentStep, setCurrentStep] = useState(1);
   const [income, setIncome] = useState({
     salary: "",
@@ -50,7 +52,15 @@ const MonthlyIncome = () => {
     if (currentStep < 3) {
       setCurrentStep(currentStep + 1);
     } else {
-      navigate("/sales-board");
+      navigate('/sales-board', {
+        state: {
+            totalDebtsOutstanding,
+            totalEMISecured,
+            totalIncome,
+            totalLifestyleExpenses,
+            totalLivingExpenses
+        }
+    });
     }
   };
 

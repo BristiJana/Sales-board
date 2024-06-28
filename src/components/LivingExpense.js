@@ -1,13 +1,18 @@
 import React ,{useState} from 'react';
 import { Container, Row, Col, Button, Table, Navbar, Nav, Dropdown } from 'react-bootstrap';
 import { FaUserCircle } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useLocation } from 'react-router-dom';
 import '../assets/style.css';
 
 const DebtFreePlansPage = () => {
+    const location = useLocation();
+    const { totalDebtsOutstanding } = location.state;
     const navigate = useNavigate();
     const [selectedPlan, setSelectedPlan] = useState(null);
 
+    const fiftyPercentOfYearly = (totalDebtsOutstanding * 0.5) / 12;
+    const fifbt=(totalDebtsOutstanding * 0.5) / 18;
+    const fifytuyty=(totalDebtsOutstanding * 0.5) / 24;
     const handleSet = () => {
         navigate('/profile');
     };
@@ -76,32 +81,32 @@ const DebtFreePlansPage = () => {
                             <tbody>
                                 <tr>
                                     <td>12 months Plan</td>
-                                    <td>₹20,833</td>
+                                    <td>{fiftyPercentOfYearly.toFixed(2)}</td>
                                     <td>₹599</td>
-                                    <td>₹649</td>
+                                    <td>{fiftyPercentOfYearly > 500000 ? 649 : 599}</td>
                                     <td>12 months</td>
                                     <td><Button variant="outline-dark">Know more</Button></td>
                                 </tr>
                                 <tr>
                                     <td>18 months Plan</td>
-                                    <td>₹13,888</td>
+                                    <td>{fifbt.toFixed(2)}</td>
                                     <td>₹599</td>
-                                    <td>₹649</td>
+                                    <td>{fifbt > 500000 ? 649 : 599}</td>
                                     <td>18 months</td>
                                     <td><Button variant="outline-dark">Know more</Button></td>
                                 </tr>
                                 <tr>
                                     <td>24 months Plan</td>
-                                    <td>₹10,416</td>
+                                    <td>{fifytuyty.toFixed(2)}</td>
                                     <td>₹599</td>
-                                    <td>₹649</td>
+                                    <td>{fifytuyty > 500000 ? 649 : 599}</td>
                                     <td>24 months</td>
                                     <td><Button variant="outline-dark">Know more</Button></td>
                                 </tr>
                             </tbody>
                         </Table>
 
-                        <h3 className="plans-subheading">Subscription Amount</h3>
+                        {/* <h3 className="plans-subheading">Subscription Amount</h3>
                         <Table striped bordered hover className="mt-3 mb-5">
                             <thead>
                                 <tr>
@@ -131,7 +136,7 @@ const DebtFreePlansPage = () => {
                                     <td>₹649</td>
                                 </tr>
                             </tbody>
-                        </Table>
+                        </Table> */}
 
                         <h2 className="plans-subheading mb-3">Choose your Debt Free Plan (DFP)</h2>
                         <p className="plans-subdescription" style={{ color:"white" }}>
@@ -148,13 +153,15 @@ const DebtFreePlansPage = () => {
 
 
                         <div className="plans-benefits">
-                            <h3 className="plans-benefits-heading">Here’s what you get when you enroll:</h3>
+                            <h3 className="plans-benefits-heading">We offer the following for you to become debt free:</h3>
                             <ul className="plans-benefits-list">
-                                <li>You get debt free as per your DFP</li>
-                                <li>Protection from Creditor Harassment while on the DFP – We will handle all communications calls, SMS, & WhatsApp with your creditors.</li>
-                                <li>Legal cover from our in-house advocates, who will reply to all your Legal Notices, attend arbitration and court hearing and any other legal matters related to your debts.</li>
-                                <li>A dedicated relationship manager who will help with your personalised monthly budgeting and counselling.</li>
-                                <li>You will be able to track your monthly payment progress through our App and portal.</li>
+                                <li>EMI Settlement Plan (ESP) – To settle your enrolled debts.</li>
+                                <li>Mobile User Application & Settlement Portal – To make our services more accessible and to keep you updated with settlement offers.</li>
+                                <li>Prepaid Credit Card – To help improve your credit score.</li>
+                                <li>Referral Program for enrolled customers – You earn when you refer new customers to us.</li>
+                                <li>Creditor’s Call Diversion Service. – To keep you free from creditor’s calls, which we will take on your behalf.</li>
+                                <li>In house legal advocates – to protect you from harassment and protect your legal rights.</li>
+                                <li>Case studies – How we have helped our customers become debt free, with the different types of settlements we offer, like One Time Settlements (OTS), Term settlements, OTS with Credit Clearance (will not affect your credit score), Moratorium Settlement (Where you have 4 to 6 months breathing space before you pay the agreed settlement) and Reversal Settlement, where your interest and charges are forgiven on the outstanding debts with credit clearance. </li>
                             </ul>
                         </div>
 

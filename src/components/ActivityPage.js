@@ -32,10 +32,10 @@ const FinalPage = () => {
                     <Button variant="primary" className="btn-lg mb-4" onClick={handleDownloadFile}>
                         Start Now Pay Rs 599 
                     </Button>
-                    <p className="upload-text">For us to process your application, you would need to download your credit file from Experian and upload it to us.</p>
+                    {/* <p className="upload-text">For us to process your application, you would need to download your credit file from Experian and upload it to us.</p>
                     <Button variant="secondary" className="btn-lg" onClick={handleUploadFile}>
                         Upload your Credit File <FaDownload className="ms-2" />
-                    </Button>
+                    </Button> */}
                 </Col>
             </Row>
         </Container>
