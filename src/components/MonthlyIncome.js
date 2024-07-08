@@ -3,6 +3,7 @@ import { Container, Row, Col, Form, Button, Navbar, Nav, Dropdown } from "react-
 import { FaUserCircle } from "react-icons/fa";
 import { useNavigate,useLocation } from "react-router-dom";
 import "../assets/style.css";
+import axios from "axios";
 
 const MonthlyIncome = () => {
   const location = useLocation();
@@ -52,6 +53,54 @@ const MonthlyIncome = () => {
     if (currentStep < 3) {
       setCurrentStep(currentStep + 1);
     } else {
+      const completeIncome = {
+        salary: Number(income.salary) || 0,
+        business: Number(income.business) || 0,
+        other: Number(income.other) || 0,
+        familySupport: Number(income.familySupport) || 0,
+      };
+  
+      const completeLivingExpenses = {
+        rent: Number(livingExpenses.rent) || 0,
+        food: Number(livingExpenses.food) || 0,
+        electricity: Number(livingExpenses.electricity) || 0,
+        gas: Number(livingExpenses.gas) || 0,
+        phone: Number(livingExpenses.phone) || 0,
+        otherUtilities: Number(livingExpenses.otherUtilities) || 0,
+      };
+  
+      const completeLifestyleExpenses = {
+        travel: Number(lifestyleExpenses.travel) || 0,
+        digital: Number(lifestyleExpenses.digital) || 0,
+        dining: Number(lifestyleExpenses.dining) || 0,
+        houseHelp: Number(lifestyleExpenses.houseHelp) || 0,
+        outing: Number(lifestyleExpenses.outing) || 0,
+      };
+  
+      const userId = localStorage.getItem('userId');
+  
+      axios
+        .post("http://localhost:5000/api/auth/updateAllTotal", {
+          userId,
+          income: completeIncome,
+          livingExpenses: completeLivingExpenses,
+          lifestyleExpenses: completeLifestyleExpenses,
+        })
+        .then((response) => {
+          console.log("All total data updated successfully:", response.data);
+          navigate("/sales-board", {
+            state: {
+              totalDebtsOutstanding,
+              totalEMISecured,
+              totalIncome,
+              totalLifestyleExpenses,
+              totalLivingExpenses,
+            },
+          });
+        })
+        .catch((error) => {
+          console.error("Failed to update all total data:", error);
+        });
       navigate('/sales-board', {
         state: {
             totalDebtsOutstanding,

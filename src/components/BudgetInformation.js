@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Row, Col, Button, Table, Navbar, Nav, Dropdown } from 'react-bootstrap';
 import { FaUserCircle } from 'react-icons/fa';
 import { useLocation, useNavigate } from 'react-router-dom';
+import axios from "axios";
 import '../assets/style.css';
 
 const BudgetInformation = () => {
@@ -22,13 +23,30 @@ const BudgetInformation = () => {
         navigate('/login-signup');
     };
 
-    const navigateToStepTwo = () => {
-        navigate('/monthly-income', {
-            state: {
-                totalDebtsOutstanding,
-                totalEMISecured
-            }
-        });
+    const navigateToStepTwo = async() => {
+        try {
+            const userId = localStorage.getItem('userId'); // Assuming the user ID is stored in localStorage after login
+            const response = await axios.post('http://localhost:5000/api/auth/updateSummary', {
+                userId,
+                summarydebts: {
+                    totalOutstandingSecured,
+                    totalEMISecured,
+                    totalOutstandingUnsecured,
+                    totalEMIUnsecured,
+                    totalDebtsOutstanding,
+                    totalMonthlyEmi
+                }
+            });
+            console.log('Summary data stored successfully:', response);
+            navigate('/monthly-income', {
+                state: {
+                    totalDebtsOutstanding,
+                    totalEMISecured
+                }
+            });
+        } catch (error) {
+            console.error('Failed to store summary data:', error);
+        }
     };
 
     return (

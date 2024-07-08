@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Form, Button, Table, Navbar, Nav, Dropdown } from "react-bootstrap";
 import { FaUserCircle } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import {useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 import "../assets/style.css";
 
 const OTPVerification = () => {
   const [debts, setDebts] = useState([]);
+  const location = useLocation();
+    const { value,value1 } = location.state;
   const navigate = useNavigate();
 
   const addDebtRow = () => {
@@ -46,7 +49,7 @@ const OTPVerification = () => {
     setDebts(newDebts);
   };
 
-  const navigateToSummary = () => {
+  const navigateToSummary =  async() => {
     // Separate secured and unsecured debts
     console.log(debts)
     const securedDebts = debts.filter((debt) => debt.secured);
@@ -60,18 +63,29 @@ const OTPVerification = () => {
     const totalEMIUnsecured = unsecuredDebts.reduce((total, debt) => total + parseFloat(debt.emi || 0), 0);
 
     // Navigate to the next page with the debts information
-    console.log(totalOutstandingSecured,
-            totalEMISecured,
-            totalOutstandingUnsecured,
-            totalEMIUnsecured)
-    navigate("/budget-information", {
-      state: {
-        totalOutstandingSecured,
+    const userId = value1;
+    try {
+      // Make a POST request to save debts data
+      await axios.post('http://localhost:5000/api/auth/debts', { userId, debts });
+      console.log('Debts data saved successfully.');
+  
+      console.log(totalOutstandingSecured,
         totalEMISecured,
         totalOutstandingUnsecured,
-        totalEMIUnsecured,
-      },
-    });
+        totalEMIUnsecured)
+      navigate("/budget-information", {
+        state: {
+          totalOutstandingSecured,
+          totalEMISecured,
+          totalOutstandingUnsecured,
+          totalEMIUnsecured,
+        },
+      });
+    } catch (error) {
+      console.error('Error saving debts data:', error);
+      alert('Failed to save debts data.');
+    }
+  
   };
 
   return (

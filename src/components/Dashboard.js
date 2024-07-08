@@ -1,10 +1,13 @@
 import React from 'react';
 import { Container, Row, Col, Card, Button, Navbar, Nav, Dropdown } from 'react-bootstrap';
 import { FaUserCircle } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { useLocation,useNavigate } from 'react-router-dom';
 import '../assets/style.css';
 
 const DashboardPage = () => {
+    const location = useLocation();
+    const { value,value1 } = location.state;
+    localStorage.setItem('userId',value1)
     const navigate = useNavigate();
 
     const handleSet = () => {
@@ -16,7 +19,12 @@ const DashboardPage = () => {
     };
 
     const handleNextStep = () => {
-        navigate('/otp-verification');
+        navigate('/otp-verification',{
+            state: {
+             value,
+             value1,
+            },
+          });
     };
 
     return (
@@ -45,7 +53,7 @@ const DashboardPage = () => {
             <Container fluid className="dashboard-container text-center text-white">
                 <Row className="justify-content-center">
                     <Col md={8}>
-                        <h1 className="dashboard-heading">Welcome Bristi!</h1>
+                        <h1 className="dashboard-heading">Welcome {value} !</h1>
                         <p className="dashboard-subheading">Let's get started with three simple steps:</p>
                         <Card className="step-card">
                             <Card.Body>

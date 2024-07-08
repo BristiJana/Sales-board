@@ -3,6 +3,8 @@ import { Container, Row, Col, Button, Table, Navbar, Nav, Dropdown } from 'react
 import { FaUserCircle } from 'react-icons/fa';
 import { useNavigate,useLocation } from 'react-router-dom';
 import '../assets/style.css';
+import axios from 'axios';
+
 
 const DebtFreePlansPage = () => {
     const location = useLocation();
@@ -21,11 +23,22 @@ const DebtFreePlansPage = () => {
         navigate('/login-signup');
     };
 
-    const handleNavigateToFinalPage = () => {
+    const handleNavigateToFinalPage = async () => {
         if (selectedPlan) {
+            const userId = localStorage.getItem('userId'); // Assume you store userId in localStorage
 
-            // navigate(`/final-page/${selectedPlan}`); // Replace with actual path to the last page with selected plan
-            navigate('/activity-page')
+        // Post the summary data to the backend
+        axios.post("http://localhost:5000/api/auth/updatePlan", {
+            userId,
+            selectedPlan
+        })
+        .then((response) => {
+            console.log("Summary data stored successfully:", response.data);
+            navigate('/activity-page');
+        })
+        .catch((error) => {
+            alert('Error updating the plan: ' + error.message);
+        });
         } else {
             alert('Please select a debt-free plan.');
         }

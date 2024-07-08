@@ -3,6 +3,7 @@ import { Container, Row, Col, Button, Table, Navbar, Nav, Dropdown } from 'react
 import { FaUserCircle } from 'react-icons/fa';
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../assets/style.css';
+import axios from 'axios';
 
 const StepThreePage = () => {
     const location = useLocation();
@@ -26,10 +27,32 @@ const StepThreePage = () => {
     };
 
     const navigateToStepTwo = () => {
-        navigate('/living-exp',{
-            state: {
-                totalDebtsOutstanding
-            }
+        const summaryData = {
+            monthlyTakeHomeIncome: monthlyTakeHomeIncome.toFixed(2),
+            securedLoanEMI: securedLoanEMI.toFixed(2),
+            livingExpenses: livingExpenses.toFixed(2),
+            lifestyleExpenses: lifestyleExpenses.toFixed(2),
+            totalFundsForDebtSolution: totalFundsForDebtSolution.toFixed(2),
+            diPercentage: diPercentage
+        };
+
+        const userId = localStorage.getItem('userId'); // Assume you store userId in localStorage
+
+        // Post the summary data to the backend
+        axios.post("http://localhost:5000/api/auth/storeSummary", {
+            userId,
+            summaryData
+        })
+        .then((response) => {
+            console.log("Summary data stored successfully:", response.data);
+            navigate('/living-exp', {
+                state: {
+                    totalDebtsOutstanding
+                }
+            });
+        })
+        .catch((error) => {
+            console.error("Failed to store summary data:", error);
         });
     };
 
